@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{msg}}</p>
+        <!-- 阻止冒泡 -->
+        <button @click.stop="add($event)">加1</button>
+        <!-- 阻止默认行为 -->
+        <button @click.prevent="add($event)">加1</button>
+        <input @keyup.enter='submit'>   
+        <input @keyup.delete='handle'>   
+        <!-- v-model底层实现 -->
+        <input type="text" :value="msg" @input="msg=$event.target.value">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                msg:0
+            },
+            methods:{
+                add(event){
+                    this.msg++;
+                    console.log(event.target.tagName);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
