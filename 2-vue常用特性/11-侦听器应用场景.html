@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <span>用户名</span>
+            <span>
+                <input type="text" v-model.lazy="name">
+            </span>
+            <span id="tips">{{tips}}</span>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                name: 'jobs',
+                tips: ''
+            },
+            methods: {
+                chackName(name) {
+                    let self = this;
+                    //调用接口，可以使用定时任务的方式模拟调用
+                    setTimeout(function(){
+                        if(name == 'admin'){
+                            self.tips = '用户名已存在，请更换一个';
+                        }else{
+                            self.tips = '用户名可以使用';
+                        }
+                    },2000)
+                }
+            },
+            watch: {
+                name(val) {
+                    console.log(val);
+                    this.chackName(val);
+                    this.tips = '正在验证';
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

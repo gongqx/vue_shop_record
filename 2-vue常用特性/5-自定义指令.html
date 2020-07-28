@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-focus v-color='{color:"orange"}' v-border='{border:"5px solid red"}'>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.directive('focus',{
+            inserted:function(el){
+                //el表示所绑定的元素
+                el.focus();
+            }
+        });
+        Vue.directive('color',{
+            bind:function(el,binding){
+                el.style.backgroundColor = binding.value.color;
+            }
+        });
+        var app = new Vue({
+            el:"#app",
+            data:{
+                msg:'Hello World'
+            },
+            // 局部指令
+            directives:{
+                border:{
+                    bind:function(el,binding){
+                        el.style.border = binding.value.border;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
